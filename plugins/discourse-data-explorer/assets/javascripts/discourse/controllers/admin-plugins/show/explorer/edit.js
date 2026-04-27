@@ -7,6 +7,7 @@ import { ajax } from "discourse/lib/ajax";
 import { popupAjaxError } from "discourse/lib/ajax-error";
 import { AUTO_GROUPS } from "discourse/lib/constants";
 import { bind } from "discourse/lib/decorators";
+import getURL from "discourse/lib/get-url";
 import QueryHelp from "discourse/plugins/discourse-data-explorer/discourse/components/modal/query-help";
 import { ParamValidationError } from "discourse/plugins/discourse-data-explorer/discourse/components/param-input-form";
 import Query from "discourse/plugins/discourse-data-explorer/discourse/models/query";
@@ -65,7 +66,25 @@ export default class PluginsExplorerController extends Controller {
         return { id: g.id, name: g.name };
       });
   }
+  get groupShareLinks() {
+    if (!this.model?.group_ids?.length || this.model.id <= 0) {
+      return [];
+    }
 
+    return this.model.group_ids
+      .map((id) => {
+        const group = this.groups?.find((g) => g.id === id);
+        
+        if (group) {
+          const path = getURL(`/g/${group.name}/reports/${this.model.id}`);
+          return {
+            name: group.name,
+            url: window.location.origin + path,
+          };
+        }
+      })
+      .filter(Boolean);
+  }
   @action
   async save() {
     try {
