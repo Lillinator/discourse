@@ -66,6 +66,7 @@ export default class PluginsExplorerController extends Controller {
         return { id: g.id, name: g.name };
       });
   }
+
   get groupShareLinks() {
     if (!this.model?.group_ids?.length || this.model.id <= 0) {
       return [];
@@ -74,7 +75,7 @@ export default class PluginsExplorerController extends Controller {
     return this.model.group_ids
       .map((id) => {
         const group = this.groups?.find((g) => g.id === id);
-        
+
         if (group) {
           const path = getURL(`/g/${group.name}/reports/${this.model.id}`);
           return {
@@ -85,6 +86,7 @@ export default class PluginsExplorerController extends Controller {
       })
       .filter(Boolean);
   }
+
   @action
   async save() {
     try {

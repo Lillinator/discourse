@@ -6,6 +6,7 @@ import didInsert from "@ember/render-modifiers/modifiers/did-insert";
 import AceEditor from "discourse/components/ace-editor";
 import BackButton from "discourse/components/back-button";
 import ConditionalLoadingSpinner from "discourse/components/conditional-loading-spinner";
+import CopyButton from "discourse/components/copy-button";
 import DButton from "discourse/components/d-button";
 import DTextarea from "discourse/components/d-textarea";
 import TextField from "discourse/components/text-field";
@@ -18,7 +19,6 @@ import ExplorerSchema from "discourse/plugins/discourse-data-explorer/discourse/
 import ParamInputForm from "discourse/plugins/discourse-data-explorer/discourse/components/param-input-form";
 import QueryResultDownloadButtons from "discourse/plugins/discourse-data-explorer/discourse/components/query-result-download-buttons";
 import QueryResultsWrapper from "discourse/plugins/discourse-data-explorer/discourse/components/query-results-wrapper";
-import CopyButton from "discourse/components/copy-button";
 
 export default class QueriesEdit extends Component {
   get showDestroyQuery() {
@@ -94,8 +94,12 @@ export default class QueriesEdit extends Component {
                 <label>{{i18n "explorer.group_share_links"}}</label>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                   {{#each @controller.groupShareLinks as |link|}}
-                    <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                      <span style="font-family: monospace; background: var(--secondary); padding: 2px 4px; border-radius: 2px;">
+                    <li
+                      style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;"
+                    >
+                      <span
+                        style="font-family: monospace; background: var(--secondary); padding: 2px 4px; border-radius: 2px;"
+                      >
                         /g/{{link.name}}/reports/{{@model.id}}
                       </span>
                       <CopyButton
