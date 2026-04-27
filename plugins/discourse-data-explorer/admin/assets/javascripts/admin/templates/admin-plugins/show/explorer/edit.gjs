@@ -18,6 +18,7 @@ import ExplorerSchema from "discourse/plugins/discourse-data-explorer/discourse/
 import ParamInputForm from "discourse/plugins/discourse-data-explorer/discourse/components/param-input-form";
 import QueryResultDownloadButtons from "discourse/plugins/discourse-data-explorer/discourse/components/query-result-download-buttons";
 import QueryResultsWrapper from "discourse/plugins/discourse-data-explorer/discourse/components/query-results-wrapper";
+import CopyButton from "discourse/components/copy-button";
 
 export default class QueriesEdit extends Component {
   get showDestroyQuery() {
@@ -88,6 +89,24 @@ export default class QueriesEdit extends Component {
                 />
               </span>
             </div>
+            {{#if @controller.groupShareLinks.length}}
+              <div class="query-group-share-links" style="margin-top: 10px;">
+                <label>{{i18n "explorer.group_share_links"}}</label>
+                <ul style="list-style: none; padding: 0; margin: 0;">
+                  {{#each @controller.groupShareLinks as |link|}}
+                    <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                      <span style="font-family: monospace; background: var(--secondary); padding: 2px 4px; border-radius: 2px;">
+                        /g/{{link.name}}/reports/{{@model.id}}
+                      </span>
+                      <CopyButton
+                        @content={{link.url}}
+                        class="btn-default btn-small"
+                      />
+                    </li>
+                  {{/each}}
+                </ul>
+              </div>
+            {{/if}}
           {{/unless}}
 
           <div class="clear"></div>
