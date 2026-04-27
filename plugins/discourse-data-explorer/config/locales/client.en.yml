@@ -27,6 +27,7 @@ en:
       create: "Create"
       create_placeholder: "Query name..."
       description_placeholder: "Enter a description here"
+      group_share_links: "Group Share Links"
       ai:
         description_title: "Generate with AI"
         description_hint: "Describe what you want in plain language. We'll generate the SQL, name, and description for you."
