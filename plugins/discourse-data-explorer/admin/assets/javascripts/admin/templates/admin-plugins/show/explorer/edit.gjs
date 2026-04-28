@@ -100,7 +100,7 @@ export default class QueriesEdit extends Component {
                       <span style="font-family: monospace; background: var(--secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.9em;">
                         {{link.path}}
                       </span>
-                      <CopyButton @clipboardText={{link.url}} class="btn-default btn-small" />
+                      <CopyButton @copyText={{link.url}} class="btn-default btn-small" />
                     </li>
                   {{/each}}
                 </ul>
