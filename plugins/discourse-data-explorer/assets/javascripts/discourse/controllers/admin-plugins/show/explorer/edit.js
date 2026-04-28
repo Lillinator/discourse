@@ -68,18 +68,17 @@ export default class PluginsExplorerController extends Controller {
   }
 
   get groupShareLinks() {
-    if (!this.model?.group_ids?.length || this.model.id <= 0) {
+    if (!this.model?.group_ids?.length || !this.model.id) {
       return [];
     }
-
     return this.model.group_ids
       .map((id) => {
         const group = this.groups?.find((g) => g.id === id);
-
         if (group) {
           const path = getURL(`/g/${group.name}/reports/${this.model.id}`);
           return {
             name: group.name,
+            path: path,
             url: window.location.origin + path,
           };
         }
@@ -157,11 +156,11 @@ export default class PluginsExplorerController extends Controller {
 
     const newHeight = Math.max(
       this.originalPaneHeight,
-      target.clientHeight + e.movementY
+      target.clientHeight + e.movementY,
     );
     const newWidth = Math.max(
       this.originalPaneWidth,
-      target.clientWidth + e.movementX
+      target.clientWidth + e.movementX,
     );
 
     target.style.height = newHeight + "px";
@@ -303,7 +302,7 @@ export default class PluginsExplorerController extends Controller {
           params: JSON.stringify(params),
           explain: this.explain,
         },
-      }
+      },
     )
       .then((result) => {
         this.results = result;

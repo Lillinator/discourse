@@ -89,23 +89,18 @@ export default class QueriesEdit extends Component {
                 />
               </span>
             </div>
-            {{#if @controller.groupShareLinks.length}}
-              <div class="query-group-share-links" style="margin-top: 10px;">
-                <label>{{i18n "explorer.group_share_links"}}</label>
+          {{#if @controller.groupShareLinks.length}}
+              <div class="query-group-share-links" style="margin-top: 15px; padding-left: 150px;">
+                <label style="font-weight: bold; display: block; margin-bottom: 5px;">
+                  {{i18n "explorer.group_share_links"}}
+                </label>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                   {{#each @controller.groupShareLinks as |link|}}
-                    <li
-                      style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;"
-                    >
-                      <span
-                        style="font-family: monospace; background: var(--secondary); padding: 2px 4px; border-radius: 2px;"
-                      >
-                        /g/{{link.name}}/reports/{{@model.id}}
+                    <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                      <span style="font-family: monospace; background: var(--secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.9em;">
+                        {{link.path}}
                       </span>
-                      <CopyButton
-                        @content={{link.url}}
-                        class="btn-default btn-small"
-                      />
+                      <CopyButton @copyText={{link.url}} class="btn-default btn-small" />
                     </li>
                   {{/each}}
                 </ul>
