@@ -96,11 +96,18 @@ export default class QueriesEdit extends Component {
                 </label>
                 <ul style="list-style: none; padding: 0; margin: 0;">
                   {{#each @controller.groupShareLinks as |link|}}
-                    <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                    <li style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; position: relative;">
+                      <input
+                        type="text"
+                        readonly
+                        value={{link.url}}
+                        id={{link.elementId}}
+                        style="position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden;"
+                      />
                       <span style="font-family: monospace; background: var(--secondary); padding: 4px 8px; border-radius: 4px; font-size: 0.9em;">
                         {{link.path}}
                       </span>
-                      <CopyButton @copyText={{link.url}} class="btn-default btn-small" />
+                      <CopyButton @selector={{link.selector}} class="btn-default btn-small" />
                     </li>
                   {{/each}}
                 </ul>

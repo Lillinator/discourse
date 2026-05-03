@@ -77,9 +77,12 @@ export default class PluginsExplorerController extends Controller {
         if (group) {
           const path = getURL(`/g/${group.name}/reports/${this.model.id}`);
           return {
+            id,
             name: group.name,
-            path: path,
+            path,
             url: window.location.origin + path,
+            elementId: `group-share-link-${id}`,
+            selector: `#group-share-link-${id}`,
           };
         }
       })
